@@ -1,0 +1,44 @@
+require FileIO;
+require Util;
+require Geometry;
+
+
+// Definitions
+struct CVec3fA : Vec3
+{
+  Integer alpha;
+};
+
+function CVec3fA(String x, String y, String z, String alpha)
+{
+  this.x = x.toScalar(); // TODO: Keep digits' fidelity (convert String to Float32??)
+  this.y = y.toScalar();
+  this.z = z.toScalar();
+  this.alpha = alpha.toInteger();
+}
+
+// Main
+operator entry() 
+{
+  FilePath sourcePath = FilePath("/Users/danvas/Projects/maya/cacheCloudTesting/data/HoC_AnimationData1_v1.0/1_short.csv");
+  
+  if(sourcePath.exists())
+  {
+    TextReader reader = TextReader(sourcePath.string());
+    Points points = Points();
+    
+    while(!reader.eof())
+    {
+      String line = reader.readLine();  
+      String splitLine[] = line.split(',');
+
+      if(splitLine.size() >= 3)
+      {
+        CVec3fA point(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
+        points.addPoint(point);
+      }
+    }
+    report('EOF');
+    report(points.getDesc(true, false));        
+  } 
+}
