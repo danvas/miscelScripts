@@ -38,7 +38,7 @@ esac
 done
 
 if [ $UPDATE = true ]; then
-	echo "Updating files from ${HOME} to ${DEV}/dev/scripts/config/home"
+	echo "Updating files from ${HOME} to ${HOME}/dev/scripts/config/home"
 	cp -r $HOME/.profile $HOME/dev/scripts/config/home
 	cp -r $HOME/.gitconfig $HOME/dev/scripts/config/home
 	cp -r $HOME/.vim $HOME/dev/scripts/config/home
